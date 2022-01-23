@@ -1,3 +1,6 @@
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode : true ,
+  images:{
+    domain: ['scontent.fdac96-1.fna.fbcdn.net'],
+   }
 }

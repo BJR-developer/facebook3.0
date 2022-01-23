@@ -1,16 +1,40 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
+body{
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.inputBox::placeholder{
+   margin-top: -4px;
+   font-size: 12px;
+}
+.shadow-md {
+   --tw-shadow: 1px 6px 100px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)
+}
+.allStorySec,.rightBar::-webkit-scrollbar {
+   display: none;
+   user-select: none;
+ }
+ .allStorySec, .rightBar{
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;
+ }
+ .simple-shadow{
+   box-shadow: 0px 0px 4px -2px;;
+ }
+ .shadow-md{
+   box-shadow: 0px 0px 4px -2px !important;
+ }
+ .navbarSticky{
+   position: sticky;
+   background: white;
+   z-index: 55;
+   top: 0;
+ }
 
-* {
-  box-sizing: border-box;
+ .signin>div button, .signin form button {
+  width: 100%;
+  background-color: blue;
+  color: white;
 }

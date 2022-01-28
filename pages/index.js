@@ -8,8 +8,16 @@ import Login from '../components/Login';
 export default function index() {
   const { data: session } = useSession()
 
-  console.log(session);
-  if (session){
+  if (!session){
+    return (
+      <> 
+    <div className='login'>
+        <Login />
+      </div>
+      </>
+      );
+  }
+   else {
     return (
       <>
   <div className='fullcontainer'>
@@ -21,13 +29,5 @@ export default function index() {
     </div>
   </div>
   </>);
-  }
-   
-  return (
-  <> 
-<div className='login'>
-    <Login />
-  </div>
-  </>
-  );
+   }
 }

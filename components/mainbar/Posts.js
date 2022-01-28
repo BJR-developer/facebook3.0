@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PostsAll from '../loop/PostsAll';
-export default function Posts() {
+import axios from 'axios'
+export default function Posts(props) {
+    const [ posts , getPosts ] = useState([]);
+
+    useEffect(()=>{
+      const fetchData = async ()=>{
+        const res = await axios('/api/posts/posts');
+        getPosts(res.data)
+      }
+      fetchData();
+    },[null])
+    console.log(posts);
   return(
     <>
+    {
+      
+    }
     <PostsAll 
       profileImg='/images/arif.jpg'
       profileName='Arif Mahmud Ryan'

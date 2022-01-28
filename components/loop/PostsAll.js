@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { BiWorld } from 'react-icons/bi';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiOutlineLike , AiOutlineDislike , AiOutlineComment , AiOutlineShareAlt } from 'react-icons/ai';

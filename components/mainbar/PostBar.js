@@ -2,9 +2,40 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import {BsCameraFill} from 'react-icons/bs';
 import { FcStackOfPhotos } from 'react-icons/fc';
-import { HiEmojiHappy } from 'react-icons/hi'
-export const PostBar = (props) => {
+import { HiEmojiHappy } from 'react-icons/hi';
+import { useSession } from 'next-auth/react';
+export const PostBar = () => {
+
     const [postVal , setPost ] = useState('');
+    const {data : session} =  useSession();
+    
+    // get posts by fetching 
+    //submit for a post
+    const handlePost = async (e) =>{
+
+      if(postVal == ''){
+        return alert("Please write something on it!!");
+      }
+
+      let post = {
+        username:session.user.name,
+        profileImg:session.user.image,
+        email : session.user.email,
+        caption:postVal,
+      }
+      try {
+        const res = await fetch('/api/posts/posts' , {
+          method:'POST',
+          body:JSON.stringify(post),
+          header: {
+            'Content-Type' : 'application/json'
+          }
+        });
+
+      } catch (error) {
+        console.log(error);
+      }
+         }
   return (
   <div className='postbar mt-5'>
   {/* input bar  */}
@@ -16,7 +47,7 @@ export const PostBar = (props) => {
        <Image className='rounded-full' src='/images/bjr.jpg' width={30} height={30} /></div>
       </div>
     </div>
-        <input className='inputBox text-xs bg-gray-200 rounded-full w-96 overflow-hidden outline-none placeholder:text-xs flex placeholder:mb-4 placeholder:pl-2 selection:pl-2 pl-2' type='text' value={postVal} placeholder="What's on your mind, Jamilur?😎" onChange={(e)=>{setPost(e.target.value)}}/>
+        <input className='inputBox text-xs bg-gray-200 rounded-full w-96 overflow-hidden outline-none placeholder:text-xs flex placeholder:mb-4 placeholder:pl-2 selection:pl-2 pl-2' type='text' value={postVal} placeholder={`What's on your mind, Jamilur?😎`} onChange={(e)=>{setPost(e.target.value)}}/>
         </div>
         {/* this is media upload bar */}
         <hr className='pt-1 mt-3'></hr>
@@ -35,6 +66,7 @@ export const PostBar = (props) => {
             <span className='ml-1 text-xs font-medium text-gray-700'>Feeling/Activity</span>
             </div>
         </div>
+        <button onClick={()=>{handlePost()}} className=' hover:bg-black bg-white hover:border-white text-black border-2 rounded-sm transition-all duration-200 hover:animate-pulse hover:text-white pt-1 pb-1 mt-5'>Post</button>
     </div>
   </div>
   );

@@ -18,11 +18,10 @@ export const Story = () => {
     </div>
   </div>
   {/* friendlist story show */}
-  <div style={{width:"500px" , padding:"1px"}} id="friendStory" className='allStorySec select-none cursor-grab overflow-x-scroll flex items-center mt-4'>
-
+  <div style={{width:"500px" , padding:"1px"}} className='allStorySec select-none cursor-grab overflow-x-scroll flex items-center mt-4'>
     <div className='friendsStory flex rounded-lg shadow-md w-20 pb-3'>
         <div className='createStory flex flex-col items-center'>
-            <Image style={{zIndex:"-2px"}} src='/images/bjr.jpg' className=' rounded-t-md object-cover object-center' width={80} height={100}/>
+            <Image src='/images/bjr.jpg' className=' rounded-t-md object-cover object-center' width={80} height={100}/>
         <span style={{width:"80px" , margin:"auto"}} className='z-50 '>
         <div style={{marginTop:"-12px"}} className= 'plusIcon mr-auto ml-auto p-1 bg-white  w-6 rounded-full'>
         <AiOutlinePlus style={{marginLeft:"-2px" , marginTop:"-2px" }} className=' text-xl text-white rounded-full bg-blue-500 p-1' />

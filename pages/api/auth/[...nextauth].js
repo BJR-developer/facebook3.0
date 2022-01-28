@@ -1,4 +1,5 @@
 import FacebookProvider from 'next-auth/providers/facebook'
+import GithubProvider from 'next-auth/providers/github'
 import NextAuth from 'next-auth'
 export default NextAuth({
     providers: [
@@ -7,13 +8,9 @@ export default NextAuth({
         clientId: process.env.FACEBOOK_ID,
         clientSecret: process.env.FACEBOOK_SECRET  
       }),
+      GithubProvider({
+        clientId: process.env.GITHUB_ID,
+        clientSecret: process.env.GITHUB_SECRET
+      })
     ],
-    callbacks:{
-      redirect({ url, baseUrl   }) {
-        if (url.startsWith(baseUrl)) return url
-        // Allows relative callback URLs
-        else if (url.startsWith("/")) return new URL(url, baseUrl).toString()
-        return baseUrl
-      }
-    }
-  })
+  });

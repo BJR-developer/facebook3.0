@@ -17,7 +17,8 @@ export const RightActiveContact = (props) => {
                                     fontWeight: "500"
                                 }
                             }
-                            className='profileFName pl-1 text-xs'>{props.profileId}</div>
+                            className='profileFName lg:hidden pl-1 text-xs'>{props.profileId}
+                            </div>
                     </div>
                     </a>);
 };

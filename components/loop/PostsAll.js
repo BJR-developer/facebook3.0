@@ -2,10 +2,10 @@ import React from 'react';
 import { BiWorld } from 'react-icons/bi';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiOutlineLike , AiOutlineDislike , AiOutlineComment , AiOutlineShareAlt } from 'react-icons/ai';
-
+import Image from 'next/image';
 export default function PostsAll(props) {
   return (
-    <div className='allPosts shadow-md bg-white mt-5 p-2'>
+    <div key={props.postKey} className='allPosts shadow-md bg-white mt-5 p-2'>
 
     {/* post about profile details*/}
     <div className='abovePostDetails flex justify-between items-center cursor-pointer'>
@@ -29,11 +29,13 @@ export default function PostsAll(props) {
       </div>
       </div>
       {/* caption of posts */}
-      <div className='captionOfPosts text-xs mb-3'>
+      <div className='captionOfPosts text-xs mb-3 mt-3'>
       {props.caption}
       </div>
       <div className='translation text-xs text-gray-500 cursor-pointer select-none mb-3'>See translation</div>
-      <img className='simple-shadow ' src={props.postImg} width={482}></img>
+      {props.postImg ? 
+        <img alt={props.ImageAlt} className='simple-shadow h-auto' src={props.postImg} width="560px" height="100%" />
+      : ""}
      
       {/* reaction bar  */}
       <div className='reactionAdd flex justify-between mt-2 shadow-md'>

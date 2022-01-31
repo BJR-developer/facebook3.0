@@ -6,7 +6,7 @@ import Posts from './mainbar/Posts';
 
 export default function Main() {
   return (
-  <div style={{marginTop:"-120px"}} className='mainBar mt-5 sm:mt-0 sm:scale-90'>
+  <div className='mainBar mt-5 sm:mt-0 sm:scale-90'>
       <Story />
       <PostBar />
       <RoomCreate />

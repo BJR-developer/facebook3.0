@@ -6,11 +6,9 @@ import { FcStackOfPhotos } from 'react-icons/fc';
 import { HiEmojiHappy } from 'react-icons/hi';
 
 export const PostBar = () => {
-    // const [imageUrl , setImageUrl] = useState('')
     const [image, setImage] = useState('')
     const [postVal , setPost ] = useState('');
     const {data : session} =  useSession();
-    // setImageUrl(''+image.size+image.name);
     const formData = new FormData;
     formData.append('file' , image)
 
@@ -67,10 +65,10 @@ export const PostBar = () => {
         <div className='profileLogo'>
         <div className='smallProfile pl-3 pr-3 flex cursor-pointer transition-all duration-150'>
       <div className='profileIcon mt-1'>
-       <Image className='rounded-full' src='/images/bjr.jpg' width={30} height={30} /></div>
+       <img className='rounded-full' src={session.user.image} width={30} height={30} /></div>
       </div>
     </div>
-        <input className='inputBox text-xs bg-gray-200 rounded-full w-96 overflow-hidden outline-none placeholder:text-xs flex placeholder:mb-4 placeholder:pl-2 selection:pl-2 pl-2' type='text' value={postVal} placeholder={`What's on your mind, Jamilur?😎`} onChange={(e)=>{setPost(e.target.value)}}/>
+        <input className='inputBox text-xs bg-gray-200 rounded-full w-96 overflow-hidden outline-none placeholder:text-xs flex placeholder:mb-4 placeholder:pl-2 selection:pl-2 pl-2' type='text' value={postVal} placeholder={`What's on your mind, ${session.user.name}?😎`} onChange={(e)=>{setPost(e.target.value)}}/>
         </div>
         {/* this is media upload bar */}
         <hr className='pt-1 mt-3'></hr>

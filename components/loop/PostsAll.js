@@ -3,8 +3,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { BiWorld } from 'react-icons/bi';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiOutlineLike , AiOutlineDislike , AiOutlineComment , AiOutlineShareAlt } from 'react-icons/ai';
-import { data } from 'autoprefixer';
-
+import { useSession } from 'next-auth/react';
 const deletePost = async(_id) =>{
   try {
     fetch('/api/posts' , {
@@ -15,7 +14,9 @@ const deletePost = async(_id) =>{
     console.log(error);
   }
 }
-
+const comingsoon = (user) =>{
+  alert(`This function will be comming soon! ${user} :( `)
+}
 const editBox = async(_id) =>{
   const newcaption = prompt("Enter your new caption");
   const data = {
@@ -36,9 +37,9 @@ const editBox = async(_id) =>{
   }
 }
 // likes request 
-const likes = async(_id , likes) =>{
+const likes = async(_id , likes, user , email) =>{
   try {
-    const data = {_id:_id , likes:likes ,islikes:true }
+    const data = {_id ,user, likes, email, islikes:true }
     const jsonData = JSON.stringify(data)
     fetch("/api/posts/reaction" , {
       method:'POST',
@@ -71,7 +72,7 @@ const dislikes = async(_id , dislikes) =>{
 }
 
 export default function PostsAll(props) {
-
+  const { data:session } = useSession();
   return (
     <div className='allPosts shadow-md bg-white mt-5 p-2'>
 
@@ -138,7 +139,7 @@ export default function PostsAll(props) {
      
       {/* reaction bar  */}
       <div className='reactionAdd flex justify-between mt-2 shadow-md'>
-      <a onClick={()=>{{likes(props._id,props.likes)}}} className='likes p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full like'>
+      <a onClick={()=>{{likes(props._id,props.likes, session.user.name,session.user.email)}}} className='likes p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full like'>
           <AiOutlineLike className='' />
           <span className='ml-1 text-xs cursor-pointer'>{props.likes}</span>
           <span className='likeval text-xs ml-2 font-medium cursor-pointer'>Like</span>
@@ -148,17 +149,18 @@ export default function PostsAll(props) {
           <span className=' ml-1 text-xs cursor-pointer'>{props.dislikes}</span>
           <span className=' text-xs ml-2 font-medium cursor-pointer'>DisLike</span>
       </a>
-      <a className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full comment'>
+      <a onClick={()=> {comingsoon(session.user.name)} } className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full comment'>
           <AiOutlineComment className='' />
           <span className='ml-1 text-xs cursor-pointer'>{props.comments}</span>
           <span className=' text-xs ml-2 font-medium cursor-pointer'>Comments</span>
       </a>
-      <a className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all rounded-xs flex items-center w-full share'>
+      <a onClick={()=> {comingsoon(session.user.name)} } className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all rounded-xs flex items-center w-full share'>
           <AiOutlineShareAlt className='' />
           <span className='ml-1 text-xs cursor-pointer'>{props.shares}</span>
           <span className=' text-xs ml-2 font-medium cursor-pointer'>Share</span>
       </a>
       </div>
+
     </div> 
   );
 }

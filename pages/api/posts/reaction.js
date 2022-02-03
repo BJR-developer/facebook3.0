@@ -4,13 +4,14 @@ const handler = async(req, res) =>{
     await mongoDB();
     if(req.method==='POST'){
         const data = req.body
-        const _id = data._id
+        const {_id  , user , email } = data
     //here is likes post method
         if(data.islikes===true){
         let likes = data.likes
             if(likes==undefined) likes = 0
         try {
-            const res = await PostModels.updateOne({_id} , {likes:likes+1});
+            // const res = await PostModels.updateOne({_id} , {reactions:{likes:{count:like+1,user}}});
+            const res = await PostModels.updateOne({_id} , { likes:{count:likes+1 , user , email}});
             console.log(res);
 
         } catch (error) {
@@ -19,11 +20,12 @@ const handler = async(req, res) =>{
     }
     // //here is dislikes
     else if(data.isdislikes===true){
+        const {_id  , user , email } = data
         let dislikes = data.dislikes
         if(data.dislikes===undefined) dislikes=0
 
         try {
-            const res = await PostModels.updateOne({_id} , {dislikes:dislikes+1})
+            const res = await PostModels.updateOne({_id} , {dislikes:{count:dislikes+1 , user, email}})
             console.log(res);
         } catch (error) {
             console.log(error);

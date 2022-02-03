@@ -3,15 +3,16 @@ import PostsAll from '../loop/PostsAll';
 import axios from 'axios'
 export default function Posts(props) {
     const [ posts , getPosts ] = useState([]);
+    const [control , setControl ] = useState([])
 
     useEffect(()=>{
       const fetchData = async ()=>{
         const res = await axios('/api/posts');
         getPosts(res.data)
+        setControl(res.data)
       }
       fetchData();
     },[posts])
-    let text = ''
 
   return(
     <>
@@ -28,8 +29,8 @@ export default function Posts(props) {
       time = {data.createdAt}
       caption = {data.caption}
       postImg = {data.postImage}
-      likes = {data.likes}
-      dislikes = {data.dislikes}
+      likes = {data.likes.count}
+      dislikes = {data.dislikes.count}
       comments = ""
       shares = ""
     />

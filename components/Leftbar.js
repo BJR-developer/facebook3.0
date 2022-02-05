@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import OptionName from './loop/leftOptionName.js';
+import OptionName from './loop/LeftOptionName';
 import { useSession } from 'next-auth/react';
 import { FaUserFriends ,FaStore ,  FaFlag ,FaUserClock } from 'react-icons/fa';
 import { MdGroups , MdMonitor } from 'react-icons/md';

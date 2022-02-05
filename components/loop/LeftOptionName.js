@@ -1,6 +1,6 @@
 import React from 'react';
 
- const leftOptionName = (props) => {
+ const LeftOptionName = (props) => {
   return (
     <div className='leftOneOption flex cursor-pointer items-center p-3 transition-all duration-150 hover:bg-gray-200'>
     {props.iconName}
@@ -8,4 +8,4 @@ import React from 'react';
   </div>
 )
 };
-export default leftOptionName;
+export default LeftOptionName;

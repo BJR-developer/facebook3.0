@@ -6,19 +6,23 @@ import Rightbar from '../components/Rightbar';
 import Main from '../components/Main'
 import Login from '../components/Login';
 export default function Index() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+ 
+  if (status === "loading") {
+    return <p className='pt-5 grid place-items-center align-middle'>Loading...</p>
+  }
 
-  if (!session){
+  if (status === "unauthenticated") {
     return (
       <> 
     <div className='login'>
         <Login />
       </div>
       </>
-      );
-  }
-   else {
-    return (
+      ); 
+     }
+
+  return (
       <>
   <div className='fullcontainer'>
     <Navbar />
@@ -29,5 +33,4 @@ export default function Index() {
     </div>
   </div>
   </>);
-   }
 }

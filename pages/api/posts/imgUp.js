@@ -6,7 +6,7 @@ export const config = {
     bodyParser: false,
   },
 };
-export default imgUp = async (req, res) => {
+export default handler = async (req, res) => {
     if(req.method==='POST'){
         const form = new formidable.IncomingForm();
         form.uploadDir = "./uploads";

@@ -60,7 +60,7 @@ export default function Navbar() {
     <div className='rightBar flex items-center'>
     {/* profile Logo  */}
       <div className='smallProfile mr-2 flex justify-center cursor-pointer bg hover:bg-gray-200 transition-all duration-500 pl-2 pr-2 sm:p-0 rounded-full'>
-      <div className='profileIcon mt-1'> <img className='rounded-full sm:p-0 sm:hidden' src={session.user.image} width={25} height={25} /></div>
+      <div className='profileIcon mt-1'> <Image alt='profile icon' className='rounded-full sm:p-0 sm:hidden' src={session.user.image} width={25} height={25} /></div>
       <div style={{marginTop:"8px" , fontWeight:"500"}} className='profileFName lg:hidden pl-1 first-line: text-xs'>{fName}</div>
       </div>
     {/* another option by icons  */}

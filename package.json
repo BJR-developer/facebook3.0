@@ -17,6 +17,7 @@
     "classnames": "^2.3.1",
     "cloudinary-build-url": "^0.2.4",
     "cloudinary-react": "^1.7.1",
+    "eslint-plugin-flowtype": "^8.0.3",
     "firebase": "^8.3.1",
     "formidable": "^2.0.1",
     "headlessui": "^0.0.0",
@@ -32,10 +33,13 @@
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.0",
     "autoprefixer": "^10.4.2",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",
+    "flow-bin": "^0.171.0",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.15"
   }

@@ -3,13 +3,11 @@ import PostsAll from '../loop/PostsAll';
 import axios from 'axios'
 export default function Posts(props) {
     const [ posts , getPosts ] = useState([]);
-    const [control , setControl ] = useState([])
 
     useEffect(()=>{
       const fetchData = async ()=>{
         const res = await axios('/api/posts');
         getPosts(res.data)
-        setControl(res.data)
       }
       fetchData();
     },[posts])
@@ -20,7 +18,6 @@ export default function Posts(props) {
       posts.map((data , index)=>{
         return (
           <PostsAll 
-      oldcaption = {data.caption}
       _id = {data._id}
       key={data._id}
       ImageAlt={data.username + data.caption + data.createdAt}
@@ -28,11 +25,13 @@ export default function Posts(props) {
       profileName={data.username}
       time = {data.createdAt}
       caption = {data.caption}
+      oldcaption = {data.caption}
       postImg = {data.postImage}
       likes = {data.likes.count}
       dislikes = {data.dislikes.count}
       comments = ""
       shares = ""
+      user = {data.reactDetails}
     />
         )
       })

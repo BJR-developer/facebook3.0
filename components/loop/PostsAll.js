@@ -4,6 +4,7 @@ import { BiWorld } from 'react-icons/bi';
 import { BsThreeDots } from 'react-icons/bs';
 import { AiOutlineLike , AiOutlineDislike , AiOutlineComment , AiOutlineShareAlt } from 'react-icons/ai';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 const deletePost = async(_id) =>{
   try {
     fetch('/api/posts' , {
@@ -81,7 +82,7 @@ export default function PostsAll(props) {
       <div className='postDetails flex'>
       {/* profile img  */}
       <div className='smallProfile pr-3 flex cursor-pointer'>
-    <div className='profileIcon mt-1'> <img className='rounded-full' src={props.profileImg} width={25} height={25} /></div>
+    <div className='profileIcon mt-1'> <Image alt='propfile image' className='rounded-full' src={props.profileImg} width={25} height={25} /></div>
     </div>
     {/* post details of admin  */}
     <div className='adminDetails flex flex-col'>
@@ -134,7 +135,7 @@ export default function PostsAll(props) {
       </div>
       <div className='translation text-xs text-gray-500 cursor-pointer select-none mb-3'>See translation</div>
       {props.postImg ? 
-        <img alt={props.ImageAlt} className='simple-shadow h-auto' src={props.postImg} width="560px" height="100%" />
+        <Image alt={props.ImageAlt} className='simple-shadow h-auto' src={props.postImg} width="560px" height="100%" />
       : ""}
      
       {/* reaction bar  */}

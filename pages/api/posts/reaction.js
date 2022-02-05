@@ -5,13 +5,18 @@ const handler = async(req, res) =>{
     if(req.method==='POST'){
         const data = req.body
         const {_id  , user , email } = data
+        console.log(data);
+        const usersData = {
+            user,
+            email
+        }
     //here is likes post method
         if(data.islikes===true){
+         
         let likes = data.likes
-            if(likes==undefined) likes = 0
+        if(likes==undefined) likes = 0
         try {
-            // const res = await PostModels.updateOne({_id} , {reactions:{likes:{count:like+1,user}}});
-            const res = await PostModels.updateOne({_id} , { likes:{count:likes+1 , user , email}});
+            const res = await PostModels.updateOne({_id} , { likes:{ count:likes+1 } ,$push :{reactDetails:{user, email}} });
             console.log(res);
 
         } catch (error) {
@@ -25,7 +30,7 @@ const handler = async(req, res) =>{
         if(data.dislikes===undefined) dislikes=0
 
         try {
-            const res = await PostModels.updateOne({_id} , {dislikes:{count:dislikes+1 , user, email}})
+            const res = await PostModels.updateOne({_id} , {dislikes:{count:dislikes+1 , $push :{reactDetails:{user, email}} }})
             console.log(res);
         } catch (error) {
             console.log(error);

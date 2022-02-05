@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { AiOutlinePlus } from 'react-icons/ai';
-
+import {useSession} from 'next-auth/react'
 import StoryAbove from '../loop/StoryAbove';
 export const Story = () => {
-
+  const {data:session} = useSession()
   return (
       <>
       {/* if no story available */}
@@ -21,7 +21,7 @@ export const Story = () => {
   <div style={{width:"575px" , padding:"1px"}} className='allStorySec select-none cursor-grab overflow-x-scroll flex items-center mt-4'>
     <div className='friendsStory flex rounded-lg shadow-md w-20 pb-3'>
         <div className='createStory flex flex-col items-center'>
-            <Image src='/images/bjr.jpg' className=' rounded-t-md object-cover object-center' width={80} height={100}/>
+            <Image alt='profile image' src={session.user.image} className=' rounded-t-md object-cover object-center' width={80} height={100}/>
         <span style={{width:"80px" , margin:"auto"}} className='z-50 '>
         <div style={{marginTop:"-12px"}} className= 'plusIcon mr-auto ml-auto p-1 bg-white  w-6 rounded-full'>
         <AiOutlinePlus style={{marginLeft:"-2px" , marginTop:"-2px" }} className=' text-xl text-white rounded-full bg-blue-500 p-1' />

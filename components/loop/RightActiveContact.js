@@ -1,11 +1,11 @@
 import React from 'react';
 import { BsDot } from 'react-icons/bs';
-
+import Image from 'next/image';
 export const RightActiveContact = (props) => {
   return (
     <a href={props.profileUrl}><div className='pl-1 pt-1 pb-1 rounded-l-full mb-3 smallProfile pr-3 flex cursor-pointer bg hover:bg-gray-200 transition-all duration-150'>
                         <div className='profileIcon rounded-full flex bottom-0'>
-                            <img className='rounded-full' src={props.profileImg}
+                            <Image className='rounded-full' alt='profile image' src={props.profileImg}
                                 width={25}
                                 height={25}/>
                      

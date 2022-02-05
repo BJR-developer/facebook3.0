@@ -135,7 +135,7 @@ export default function PostsAll(props) {
       </div>
       <div className='translation text-xs text-gray-500 cursor-pointer select-none mb-3'>See translation</div>
       {props.postImg ? 
-        <Image alt={props.ImageAlt} className='simple-shadow h-auto' src={props.postImg} width="560px" height="100%" />
+        <Image alt={props.ImageAlt} className='simple-shadow' src={props.postImg} width="150px" height="100%" layout="responsive"  />
       : ""}
      
       {/* reaction bar  */}

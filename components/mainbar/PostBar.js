@@ -11,7 +11,7 @@ export const PostBar = () => {
     const {data : session} =  useSession();
     const formData = new FormData;
     formData.append('file' , image)
-
+    console.log(formData);
     const uploadImage = async() =>{
       const url = '/api/posts/imgUp';
       const formData = new FormData;

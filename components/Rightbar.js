@@ -4,7 +4,7 @@ import {BiVideoPlus, BiSearchAlt2, BiDotsHorizontal } from 'react-icons/bi';
 import { RightActiveContact } from './loop/RightActiveContact';
 const Rightbar = () => {
     return (
-        <div className='rightBar h-5/6 overflow-y-auto sm:hidden  fixed right-0 pt-5 pl-5 w-64 lg:w-auto float-right shadow-md rounded-sm mr-3 mt-5'>
+        <div className='rightBar h-5/6 overflow-y-auto md:hidden  fixed right-0 pt-5 pl-5 w-64 lg:w-auto float-right shadow-md rounded-sm mr-3 mt-5'>
             <div className='rTitleBar flex justify-between text-gray-500 font-medium'>
                 <div className='contactsName text-sm lg:hidden'>Active Contacts</div>
 

@@ -26,7 +26,7 @@ export default function Navbar() {
     </Head>
   <div className='navbarSticky pl-3 pr-2 pt-1 pb-1 sm:p-0 flex justify-between lg:justify-center shadow bg-white'>
     {/* under code for leftHeader */}
-    <div className='leftBar flex'>
+    <div className='leftBar flex msm:hidden'>
       <div style={{marginTop:"3px"}} className='logo pt-1'>
       <Image alt="Facebook logo" src='/images/fbsvg.png' width={30} height={30} />
       </div>
@@ -51,7 +51,7 @@ export default function Navbar() {
     <a style={{marginBottom:"-10px" , }} className=' pb-3 hover:border-blue-500 hover:text-blue-700 focus:border-blue-500 focus:text-blue-700 border-b-2 border-b-transparent focus:transition-all duration-700 text-gray-600 text-xl pl-9 pr-6 md:pl-7 md:pr-7' ><AiOutlineShop   /></a>
     </Link>
     <Link  href="/#">
-    <a style={{marginBottom:"-10px" , }} className=' pb-3 hover:border-blue-500 hover:text-blue-700 focus:border-blue-500 focus:text-blue-700 border-b-2 border-b-transparent focus:transition-all duration-700 text-gray-600 text-xl pl-9 pr-6 md:pl-7 md:pr-7' ><RiGamepadLine   /></a>
+    <a style={{marginBottom:"-10px" , }} className=' pb-3 msm:hidden hover:border-blue-500 hover:text-blue-700 focus:border-blue-500 focus:text-blue-700 border-b-2 border-b-transparent focus:transition-all duration-700 text-gray-600 text-xl pl-9 pr-6 md:pl-7 md:pr-7' ><RiGamepadLine   /></a>
     </Link>
     </div>
 

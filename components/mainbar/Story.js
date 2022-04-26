@@ -8,7 +8,7 @@ export const Story = () => {
   return (
       <>
       {/* if no story available */}
-  <div style={{width:"575px"}} className='Littlestory p-2 shadow-md flex items-center w-96'>
+  <div className='Littlestory p-2 shadow-md flex items-center  w-auto m-auto'>
     <div className='plusIcon p-2 bg-blue-100 rounded-full'>
         <AiOutlinePlus className=' text-blue-600' />
     </div>
@@ -18,7 +18,7 @@ export const Story = () => {
     </div>
   </div>
   {/* friendlist story show */}
-  <div style={{width:"575px" , padding:"1px"}} className='allStorySec select-none cursor-grab overflow-x-scroll flex items-center mt-4'>
+  <div style={{ padding:"1px"}} className='allStorySec sm:w-[391px] w-auto  select-none cursor-grab overflow-x-auto flex items-center mt-4'>
     <div className='friendsStory flex rounded-lg shadow-md w-20 pb-3'>
         <div className='createStory flex flex-col items-center'>
             <Image alt='profile image' src={session.user.image} className=' rounded-t-md object-cover object-center' width={80} height={100}/>

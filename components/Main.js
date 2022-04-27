@@ -6,11 +6,11 @@ import Posts from './mainbar/Posts';
 
 export default function Main() {
   return (
-  <div className='mainBar mt-5 sm:mt-0 sm:scale-90'>
+    <div className='mainBar mt-5 sm:-mt-[124px] sm:scale-90'>
       <Story />
       <PostBar />
       <RoomCreate />
       <Posts />
-  </div>
+    </div>
   );
 }

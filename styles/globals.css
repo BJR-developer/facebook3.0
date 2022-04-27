@@ -7,7 +7,7 @@ body{
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 /* Track */
@@ -18,7 +18,7 @@ body{
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rebeccapurple; 
+  background: rgb(51, 99, 153); 
   border-radius: 10px;
 }
 
@@ -31,7 +31,9 @@ body{
    font-size: 12px;
 }
 .shadow-md {
-   --tw-shadow: 1px 6px 100px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)
+  box-shadow: 0px 0px 0px 0px !important;
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
 }
 .rightBar::-webkit-scrollbar {
    display: none;

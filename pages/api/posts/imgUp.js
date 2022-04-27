@@ -1,6 +1,5 @@
 import formidable from 'formidable';
 import fs from 'fs';
-import uniqid from 'uniqid';
 export const config = {
   api: {
     bodyParser: false,

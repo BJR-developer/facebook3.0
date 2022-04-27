@@ -22,7 +22,7 @@ class SimpleReactFileUpload extends React.Component {
     this.setState({file:e.target.files[0]})
   }
   fileUpload(file){
-    const url = '/api/posts/imgUp';
+    const url = 'https://api.cloudinary.com/v1_1/dxtnn1awt/image/upload';
     const formData = new FormData();
     formData.append('file',file)
     const config = {
@@ -30,7 +30,8 @@ class SimpleReactFileUpload extends React.Component {
             'content-type': 'multipart/form-data'
         }
     }
-    return  post(url, formData ,config)
+    const res =   post(url, formData ,config);
+    console.log(res);
   }
 
   render() {

@@ -18,7 +18,7 @@ export const Story = () => {
     </div>
   </div>
   {/* friendlist story show */}
-  <div style={{ padding:"1px"}} className='allStorySec sm:w-[391px] w-auto  select-none cursor-grab overflow-x-auto flex items-center mt-4'>
+  <div style={{ padding:"1px"}} className='allStorySec sm:w-[391px] w-[500px]  select-none cursor-grab overflow-x-auto flex items-center mt-4'>
     <div className='friendsStory flex rounded-lg shadow-md w-20 pb-3'>
         <div className='createStory flex flex-col items-center'>
             <Image alt='profile image' src={session.user.image} className=' rounded-t-md object-cover object-center' width={80} height={100}/>

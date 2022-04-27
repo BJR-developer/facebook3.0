@@ -67,6 +67,7 @@ export const PostBar = () => {
       setImage('');
       setPreviewImage('')
       setUploading(false);
+      location.reload();
     } catch (error) {
       console.log(error);
       setUploading(false)

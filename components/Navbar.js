@@ -27,10 +27,10 @@ export default function Navbar() {
       <div className='navbarSticky pl-3 pr-2 pt-1 pb-1 sm:p-0 flex justify-between lg:justify-center shadow bg-white'>
         {/* under code for leftHeader */}
         <div className='leftBar flex msm:hidden'>
-          <div style={{ marginTop: "3px" }} className='logo pt-1'>
+          <div className='logo pt-1 mt-[3px]'>
             <Image alt="Facebook logo" src='/images/fbsvg.png' width={30} height={30} />
           </div>
-          <div style={{ marginTop: "5px" }} className='searchBar sm:hidden ml-2 flex items-center bg-gray-100 rounded-2xl h-7 w-48 lg:w-auto pr-2'>
+          <div style={{ marginTop: "5px" }} className='searchBar lg:hidden ml-2 flex items-center bg-gray-100 rounded-2xl h-7 w-48 lg:w-auto pr-2'>
             <div className='searchLogo sm:hidden ml-2'><AiOutlineSearch /></div>
             <input style={{ margin: "" }} className='inputBox lg:hidden text-xs bg-transparent w-40 overflow-hidden outline-none placeholder:text-xs flex placeholder:mb-4 ml-2' placeholder='Search Facebook' type='text' value={searchVal} onChange={(e) => { setSearch(e.target.value) }} />
           </div>
@@ -59,10 +59,12 @@ export default function Navbar() {
 
         <div className='rightBar flex items-center'>
           {/* profile Logo  */}
-          <div className='smallProfile mr-2 flex justify-center cursor-pointer bg hover:bg-gray-200 transition-all duration-500 pl-2 pr-2 sm:p-0 rounded-full'>
-            <div className='profileIcon mt-1'> <Image alt='profile icon' className='rounded-full sm:p-0 sm:hidden' src={session.user.image} width={25} height={25} /></div>
+          {/* <div className='smallProfile mr-2 flex justify-center cursor-pointer bg hover:bg-gray-200 transition-all duration-500 pl-2 pr-2 sm:p-0 rounded-full'>
+            <div className='profileIcon mt-1'> 
+            <Image alt='profile icon' className='rounded-full sm:p-0 sm:hidden' src={session.user.image} width={25} height={25} />
+            </div>
             <div style={{ marginTop: "8px", fontWeight: "500" }} className='profileFName lg:hidden pl-1 first-line: text-xs'>{fName}</div>
-          </div>
+          </div> */}
           {/* another option by icons  */}
           <IoApps style={{ fontSize: "33px" }} className=' md:hidden bg-gray-200 lg:hidden transition-all duration-500 rounded-full p-2 mr-2 cursor-pointer hover:bg-gray-300' />
           <RiMessengerFill style={{ fontSize: "33px" }} className=' md:hidden bg-gray-200 transition-all duration-500 rounded-full p-2 mr-2 cursor-pointer hover:bg-gray-300' />
@@ -71,7 +73,10 @@ export default function Navbar() {
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <Menu.Button>
-                <MdArrowDropDown style={{ fontSize: "33px", marginTop: "5px" }} aria-hidden='true' className=' bg-gray-200 transition-all duration-500 rounded-full p-2 mr-2 cursor-pointer hover:bg-gray-300' aria-expanded='true' aria-haspopup='true' />
+                <div className='logo pt-1  rounded-full'>
+                  <Image alt="Facebook logo" src={session.user.image} width={30} height={30} className="rounded-full" />
+                </div>
+                {/* <MdArrowDropDown style={{ fontSize: "33px", marginTop: "5px" }} aria-hidden='true' className=' bg-gray-200 transition-all duration-500 rounded-full p-2 mr-2 cursor-pointer hover:bg-gray-300' aria-expanded='true' aria-haspopup='true' /> */}
               </Menu.Button>
             </div>
 

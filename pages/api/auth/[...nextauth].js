@@ -1,16 +1,16 @@
 import FacebookProvider from 'next-auth/providers/facebook'
-import GithubProvider from 'next-auth/providers/github'
 import NextAuth from 'next-auth'
 export default NextAuth({
-    providers: [
-      // OAuth authentication providers...
-      FacebookProvider({
-        clientId: process.env.FACEBOOK_ID,
-        clientSecret: process.env.FACEBOOK_SECRET  
-      }),
-      GithubProvider({
-        clientId: process.env.GITHUB_ID,
-        clientSecret: process.env.GITHUB_SECRET
-      })
-    ],
-  });
+  providers: [
+    // OAuth authentication providers...
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET
+    }),
+  ],
+  theme: {
+    colorScheme: "auto", // "auto" | "dark" | "light"
+    brandColor: "#008000", // Hex color code
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/225px-2021_Facebook_icon.svg.png" // Absolute URL to image
+  }
+});

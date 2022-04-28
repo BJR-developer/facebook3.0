@@ -53,6 +53,10 @@ export default function PostsAll(props) {
   //edit posts
   const editBox = async (_id) => {
     const newcaption = prompt("Enter your new caption");
+
+    if (newcaption === null) {
+      return;
+    }
     const data = {
       _id, newcaption: newcaption, isUpdate: true
     }
@@ -71,7 +75,6 @@ export default function PostsAll(props) {
       console.log(err);
     }
   }
-
   // likes request 
   const likes = async (_id, likes, user, email) => {
 
@@ -153,7 +156,7 @@ export default function PostsAll(props) {
     <div className='allPosts shadow-md bg-white mt-5 p-2'>
 
       {/* post about profile details*/}
-      <div className='abovePostDetails flex justify-between items-center cursor-pointer'>
+      <div className='abovePostDetails flex justify-between items-center'>
         <div className='postDetails flex'>
           {/* profile img  */}
           <div className='smallProfile pr-3 flex cursor-pointer'>

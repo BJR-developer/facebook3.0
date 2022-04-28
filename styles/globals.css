@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -12,70 +13,82 @@ body{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(51, 99, 153); 
+  background: rgb(51, 99, 153);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(80, 16, 145); 
+  background: rgb(80, 16, 145);
 }
-.inputBox::placeholder{
-   margin-top: -4px;
-   font-size: 12px;
+
+.inputBox::placeholder {
+  margin-top: -4px;
+  font-size: 12px;
 }
+
 .shadow-md {
   box-shadow: 0px 0px 0px 0px !important;
   border: 1px solid #eeeeee;
   border-radius: 6px;
 }
-.rightBar::-webkit-scrollbar {
-   display: none;
-   user-select: none;
- }
- .allStorySec::-webkit-scrollbar{
-   user-select: none;
-   display: none;
- }
- .simple-shadow{
-   box-shadow: 0px 0px 4px -2px;;
- }
- .shadow-md{
-   box-shadow: 0px 0px 4px -2px !important;
- }
- .navbarSticky{
-   position: sticky;
-   background: white;
-   z-index: 55;
-   top: 0;
- }
 
- .signin>div button, .signin form button {
+.rightBar::-webkit-scrollbar {
+  display: none;
+  user-select: none;
+}
+
+.allStorySec::-webkit-scrollbar {
+  user-select: none;
+  display: none;
+}
+
+.simple-shadow {
+  box-shadow: 0px 0px 4px -2px;
+  ;
+}
+
+.shadow-md {
+  box-shadow: 0px 0px 4px -2px !important;
+}
+
+.navbarSticky {
+  position: sticky;
+  background: white;
+  z-index: 55;
+  top: 0;
+}
+
+.signin>div button,
+.signin form button {
   width: 100%;
   background-color: blue;
   color: white;
 }
-@media only screen and (max-width:625px){
-  .mainBar{
-    margin-top:-120px
+
+@media only screen and (max-width:625px) {
+  .mainBar {
+    margin-top: -120px
   }
 }
-.imageUpload{
+
+.imageUpload {
   height: 50px;
   width: 140px;
   cursor: pointer;
   background: red;
-  opacity:0;
+  opacity: 0;
   margin-top: -20px;
   margin-left: -30px;
 }
-.autoHeight{
+
+.autoHeight {
   height: auto !important;
 
 }

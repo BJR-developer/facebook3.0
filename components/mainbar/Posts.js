@@ -6,6 +6,7 @@ export default function Posts(props) {
   const [posts, getPosts] = useState([]);
   const [isLoading, setLoading] = useState();
   useEffect(() => {
+
     const fetchData = async () => {
       const res = await fetch('/api/posts/').then(res => res.json())
       getPosts(res);
@@ -24,6 +25,8 @@ export default function Posts(props) {
               ImageAlt={data.username + data.caption + data.createdAt}
               profileImg={data.profileImg}
               profileName={data.username}
+              user={data.username}
+              email={data.email}
               time={data.createdAt}
               caption={data.caption}
               oldcaption={data.caption}

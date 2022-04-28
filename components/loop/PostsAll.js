@@ -16,6 +16,7 @@ export default function PostsAll(props) {
   const [offlineDisLikes, setOfflineDisLikes] = useState(props.reactDetailsInverse.length);
   const { data: session } = useSession();
   const router = useRouter();
+  const isYourPost = ((session.user.name === props.user) && (session.user.email === props.email))
 
   const allLikes = props.reactDetails;
   const isHeLike = allLikes.findIndex(val => (val.user === session.user.name) !== -1)
@@ -171,37 +172,44 @@ export default function PostsAll(props) {
         </div>
 
         {/* posts edit option  */}
-        <div className='postActionEdit'>
+        {
+          isYourPost ?
 
-          <Menu as="div" className="relative inline-block text-left">
-            <div>
-              <Menu.Button>
-                <BsThreeDots aria-hidden="true" aria-expanded='true' aria-haspopup='true' />
-              </Menu.Button>
-            </div>
+            <div className='postActionEdit'>
 
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <Menu.Item as='div'>
-                    <div onClick={() => { editBox(props._id) }} className=' text-xs p-2 hover:bg-gray-200'>Edit</div>
-                  </Menu.Item>
-                  <Menu.Item as='div'>
-                    <div onClick={() => { deletePost(props._id) }} className=' text-xs p-2 hover:bg-gray-200'>Delete</div>
-                  </Menu.Item>
+                  <Menu.Button>
+                    <BsThreeDots aria-hidden="true" aria-expanded='true' aria-haspopup='true' />
+                  </Menu.Button>
                 </div>
-              </Menu.Items>
-            </Transition>
-          </Menu>
-        </div>
+
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div>
+                      <Menu.Item as='div'>
+                        <div onClick={() => { editBox(props._id) }} className=' text-xs p-2 hover:bg-gray-200'>Edit</div>
+                      </Menu.Item>
+                      <Menu.Item as='div'>
+                        <div onClick={() => { deletePost(props._id) }} className=' text-xs p-2 hover:bg-gray-200'>Delete</div>
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
+            :
+            ""
+        }
+
       </div>
       {/* caption of posts */}
       <div className='captionOfPosts text-xs mb-3 mt-3'>

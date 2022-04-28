@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PostsAll from '../loop/PostsAll';
 import axios from 'axios'
+import { Loader } from '../Loader';
 export default function Posts(props) {
   const [posts, getPosts] = useState([]);
   const [isLoading, setLoading] = useState();
@@ -31,12 +32,13 @@ export default function Posts(props) {
               dislikes={data.dislikes?.count}
               comments=""
               shares=""
-              user={data.reactDetails}
+              reactDetails={data.reactDetails}
+              reactDetailsInverse={data.reactDetailsInverse}
             />
           )
         })
       }
-
+      <Loader />
     </>
   );
 }

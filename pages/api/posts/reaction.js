@@ -1,6 +1,7 @@
 import PostModels from '../../../lib/models/PostSchema';
 import mongoDB from "../../../lib/mongodb";
 const handler = async (req, res) => {
+
     await mongoDB();
 
     if (req.method === 'GET') {
@@ -25,13 +26,29 @@ const handler = async (req, res) => {
         }
         // //here is dislikes
         else if (data.isdislikes === true) {
-            const { _id, user, email } = data
             let dislikes = data.dislikes
             if (data.dislikes === undefined) dislikes = 0
 
             try {
-                const res = await PostModels.updateOne({ _id }, { dislikes: { count: dislikes + 1, $push: { reactDetails: { user, email } } } })
+                const res = await PostModels.updateOne({ _id }, { dislikes: { count: dislikes + 1 }, $push: { reactDetailsInverse: { user, email } } });
                 console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+    if (req.method === "DELETE") {
+        const { _id, user, email, islikes, isdislikes } = req.body;
+        if (islikes) {
+            try {
+                const res = await PostModels.updateMany({ _id }, { $pull: { reactDetails: { user, email } } });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (isdislikes) {
+            try {
+                const res = await PostModels.updateMany({ _id }, { $pull: { reactDetailsInverse: { user, email } } });
             } catch (error) {
                 console.log(error);
             }

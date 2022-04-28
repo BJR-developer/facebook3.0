@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { BiWorld } from 'react-icons/bi';
 import { BsThreeDots } from 'react-icons/bs';
-import { AiOutlineLike, AiOutlineDislike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai';
+import { AiOutlineLike, AiFillLike, AiOutlineDislike, AiFillDislike, AiOutlineComment, AiOutlineShareAlt } from 'react-icons/ai';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import moment from 'moment';
@@ -10,7 +10,28 @@ import { useRouter } from 'next/router';
 
 
 export default function PostsAll(props) {
+  const [isLike, setLike] = useState(false);
+  const [offlineLikes, setOfflineLikes] = useState(props.reactDetails.length);
+  const [isDislike, setDislike] = useState(false);
+  const [offlineDisLikes, setOfflineDisLikes] = useState(props.reactDetailsInverse.length);
+  const { data: session } = useSession();
+  const router = useRouter();
 
+  const allLikes = props.reactDetails;
+  const isHeLike = allLikes.findIndex(val => (val.user === session.user.name) !== -1)
+
+  const allDislikes = props.reactDetailsInverse;
+  const isHeDisLike = allDislikes.findIndex(val => (val.user === session.user.name) !== -1)
+
+  //hold reaction color
+  useEffect(() => {
+    if (isHeLike === 0) {
+      setLike(true)
+    };
+    if (isHeDisLike === 0) {
+      setDislike(true)
+    }
+  }, []);
 
   const deletePost = async (_id) => {
     try {
@@ -23,11 +44,13 @@ export default function PostsAll(props) {
       console.log(error);
     }
   }
+
   const comingsoon = (user) => {
     alert(`This function will be comming soon! ${user} :( `)
   }
-  const editBox = async (_id) => {
 
+  //edit posts
+  const editBox = async (_id) => {
     const newcaption = prompt("Enter your new caption");
     const data = {
       _id, newcaption: newcaption, isUpdate: true
@@ -41,49 +64,90 @@ export default function PostsAll(props) {
           'Content-Type': 'application/json'
         }
       })
+      location.reload();
       console.log(_id);
     } catch (err) {
       console.log(err);
     }
   }
+
   // likes request 
   const likes = async (_id, likes, user, email) => {
+
     try {
       const data = { _id, user, likes, email, islikes: true }
-      const jsonData = JSON.stringify(data)
-      fetch("/api/posts/reaction", {
-        method: 'POST',
-        body: jsonData,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+      const jsonData = JSON.stringify(data);
+
+      if (isLike) {
+
+        setLike(false);
+        setOfflineLikes(offlineLikes - 1);
+
+        const res = await fetch("/api/posts/reaction", {
+          method: "DELETE",
+          body: jsonData,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+      } else if (isHeLike === -1) {
+
+        setOfflineLikes(offlineLikes + 1);
+        setLike(true);
+
+        const res = await fetch("/api/posts/reaction", {
+          method: 'POST',
+          body: jsonData,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
     } catch (error) {
       console.log(error);
+      setLike(false)
     }
   }
   //dislikes request
-  const dislikes = async (_id, dislikes) => {
+  const dislikes = async (_id, dislikes, user, email) => {
+
     try {
-      const data = {
-        _id, dislikes, isdislikes: true
+
+      if (isDislike) {
+        setDislike(false);
+        setOfflineDisLikes(offlineDisLikes - 1);
+        const data = { _id, user, dislikes, email, isdislikes: true }
+        const jsonData = JSON.stringify(data);
+
+        const res = await fetch("/api/posts/reaction", {
+          method: "DELETE",
+          body: jsonData,
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+      } else if (isHeDisLike === -1) {
+
+        setDislike(true);
+        setOfflineDisLikes(offlineDisLikes + 1);
+        const data = { _id, user, dislikes, email, isdislikes: true }
+        const jsonData = JSON.stringify(data);
+        const res = await fetch('/api/posts/reaction', {
+          method: 'POST',
+          body: jsonData,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        setDislike(true)
       }
-      const jsonData = JSON.stringify(data)
-      fetch('/api/posts/reaction', {
-        method: 'POST',
-        body: jsonData,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
     } catch (error) {
       console.log(error);
+      setDislike(false);
+      setOfflineDisLikes(offlineDisLikes - 1);
     }
   }
-
-
-  const { data: session } = useSession();
-  const router = useRouter();
   return (
     <div className='allPosts shadow-md bg-white mt-5 p-2'>
 
@@ -151,13 +215,23 @@ export default function PostsAll(props) {
       {/* reaction bar  */}
       <div className='reactionAdd flex justify-between mt-2 shadow-md'>
         <a onClick={() => { { likes(props._id, props.likes, session.user.name, session.user.email) } }} className='likes p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full like'>
-          <AiOutlineLike className='' />
-          <span className='ml-1 text-xs cursor-pointer'>{props.likes}</span>
+          {
+            isLike ?
+              <AiFillLike className=' text-blue-500' />
+              :
+              <AiOutlineLike className='' />
+          }
+          <span className='ml-1 text-xs cursor-pointer'>{offlineLikes}</span>
           <span className='likeval text-xs ml-2 font-medium cursor-pointer'>Like</span>
         </a>
-        <a onClick={() => { dislikes(props._id, props.dislikes) }} className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full dislike'>
-          <AiOutlineDislike className='' />
-          <span className=' ml-1 text-xs cursor-pointer'>{props.dislikes}</span>
+        <a onClick={() => { dislikes(props._id, props.dislikes, session.user.name, session.user.email) }} className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full dislike'>
+          {
+            isDislike ?
+              <AiFillDislike className=' text-rose-500' />
+              :
+              <AiOutlineDislike className='' />
+          }
+          <span className=' ml-1 text-xs cursor-pointer'>{offlineDisLikes}</span>
           <span className=' text-xs ml-2 font-medium cursor-pointer'>DisLike</span>
         </a>
         <a onClick={() => { comingsoon(session.user.name) }} className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all cursor-pointer rounded-xs flex items-center w-full comment'>
@@ -165,7 +239,7 @@ export default function PostsAll(props) {
           <span className='ml-1 text-xs cursor-pointer'>{props.comments}</span>
           <span className=' text-xs ml-2 font-medium cursor-pointer'>Comments</span>
         </a>
-        <a onClick={() => router.reload()} className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all rounded-xs flex items-center w-full share'>
+        <a onClick={() => { comingsoon(session.user.name) }} className='p-2 text-xl hover:bg-gray-200 duration-300 focus:text-blue-500 transition-all rounded-xs flex items-center w-full share'>
           <AiOutlineShareAlt className='' />
           <span className='ml-1 text-xs cursor-pointer'>{props.shares}</span>
           <span className=' text-xs ml-2 font-medium cursor-pointer'>Share</span>
